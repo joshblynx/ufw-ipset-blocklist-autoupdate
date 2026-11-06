@@ -200,7 +200,7 @@ function update_blocklist() {
     log "Updating blacklist '$1' ..."
     log_verbose "Downloading blocklist '$1' from: $2 ..."
     local tempfile=$(mktemp "/tmp/blocklist.$1.XXXXXXXX")
-    wget -q -O "$tempfile" "$2"
+    wget -q -O "$tempfile" "$2" || curl -s -o "$tempfile" file://"$2"
 
     # Check downloaded list
     linecount=$(cat "$tempfile" | wc -l)
